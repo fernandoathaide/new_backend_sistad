@@ -8,6 +8,7 @@ export interface HttpVerbMap{
     post?: Array<FeatureModuleRouterInfo>;
     put?: Array<FeatureModuleRouterInfo>;
     patch?: Array<FeatureModuleRouterInfo>;
+    delete?: Array<FeatureModuleRouterInfo>;
 }
 export interface FeatureModuleRouterInfo{
     endpoint?: string;

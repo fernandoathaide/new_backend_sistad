@@ -26,7 +26,7 @@ class UserController {
 
     getUserById(req: Request, res: Response){
         UserService
-            .getUserById(parseInt(req.params.id_user))
+            .getUserById(parseInt(req.params.id))
             .then(_.partial(ResponseHandlers.onSuccess, res))
             .catch(_.partial(ResponseHandlers.onError, res, 'Erro ao buscar um usuário por ID.'))
     }

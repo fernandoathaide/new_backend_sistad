@@ -76,8 +76,7 @@ var Server = (function () {
         });
     };
     Server.prototype.dataBaseSyncHandler = function (dataBaseInfo) {
-        var _a = dataBaseInfo.sequelize, options = _a.options, config = _a.config, modelManager = _a.modelManager;
-        var models = modelManager.models;
+        var options = dataBaseInfo.options, config = dataBaseInfo.config, models = dataBaseInfo.models;
         this.upServer();
         this.logDataBaseConnection({ models: models, options: options, config: config });
     };
@@ -99,14 +98,15 @@ var Server = (function () {
     };
     Server.prototype.logDataBaseConnection = function (_a) {
         var models = _a.models, options = _a.options, config = _a.config;
-        var dialect = options.dialect, dataBasehost = options.dataBasehost;
-        var database = config.database, dataBassePort = config.dataBassePort;
-        if (dialect && dataBasehost && database && dataBassePort && models) {
+        var dialect = options.dialect, host = options.host;
+        var database = config.database, port = config.port;
+        if (dialect && host && database && port && models) {
             console.log("Data base dialect: " + dialect);
-            console.log("Host de conex\u00E3o data base: " + dataBasehost);
+            console.log("Host de conex\u00E3o data base: " + host);
             console.log("Data Base name: " + database);
-            console.log("Data Base Port: " + dataBassePort);
-            console.log("Created Tables: " + models);
+            console.log("Data Base Port: " + port);
+            console.log('Created Tables:');
+            console.log(models);
         }
     };
     return Server;

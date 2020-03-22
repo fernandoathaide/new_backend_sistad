@@ -25,10 +25,36 @@ var UserRouterModule = (function (_super) {
         var _this = _super.call(this, 'users') || this;
         _this.MODULES_ENDPOINT_MAP = (_a = {},
             _a[_this.moduleName] = {
+                post: [
+                    {
+                        endpoint: _this.context + "/" + _this.version + "/" + _this.moduleName + "/create",
+                        callback: user_controller_1.default.createUser,
+                        isProtected: false
+                    }
+                ],
                 get: [
                     {
                         endpoint: _this.context + "/" + _this.version + "/" + _this.moduleName + "/all",
                         callback: user_controller_1.default.getAllUser,
+                        isProtected: false
+                    },
+                    {
+                        endpoint: _this.context + "/" + _this.version + "/" + _this.moduleName + "/:id",
+                        callback: user_controller_1.default.getUserById,
+                        isProtected: false
+                    }
+                ],
+                put: [
+                    {
+                        endpoint: _this.context + "/" + _this.version + "/" + _this.moduleName + "/:id/update",
+                        callback: user_controller_1.default.updateUser,
+                        isProtected: false
+                    }
+                ],
+                delete: [
+                    {
+                        endpoint: _this.context + "/" + _this.version + "/" + _this.moduleName + "/:id/destroy",
+                        callback: user_controller_1.default.deleteUser,
                         isProtected: false
                     }
                 ]

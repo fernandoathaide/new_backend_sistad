@@ -23,8 +23,7 @@ export class Server {
         }
     }
     private dataBaseSyncHandler(dataBaseInfo){
-        const { options, config, modelManager } = dataBaseInfo.sequelize;
-        const { models } = modelManager;
+        const {options, config, models} = dataBaseInfo;
         this.upServer();
         this.logDataBaseConnection({ models, options, config });
     }
@@ -45,14 +44,15 @@ export class Server {
         console.log(`Server erro de running: Error:  ${error}`);
     }
     private logDataBaseConnection({models, options, config}){
-        const  {dialect, dataBasehost} = options;
-        const  { database, dataBassePort} = config;
-        if(dialect && dataBasehost && database && dataBassePort && models){
+        const { dialect, host } = options;
+        const { database, port } = config;
+        if(dialect && host && database && port && models){
             console.log(`Data base dialect: ${dialect}`);
-            console.log(`Host de conexão data base: ${ dataBasehost }`);
+            console.log(`Host de conexão data base: ${ host }`);
             console.log(`Data Base name: ${database}`);
-            console.log(`Data Base Port: ${dataBassePort}`);
-            console.log(`Created Tables: ${models}`);
+            console.log(`Data Base Port: ${port}`);
+            console.log('Created Tables:');
+            console.log(models);
         }
     }
 }

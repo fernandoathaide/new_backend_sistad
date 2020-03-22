@@ -1,4 +1,4 @@
-require('custom-env').env();
+require('custom-env').env('development', './');
 const{
     NODE_ENV,
     SERVER_HOST,

@@ -82,7 +82,7 @@ var UserController = (function () {
     };
     UserController.prototype.getUserById = function (req, res) {
         user_service_1.default
-            .getUserById(parseInt(req.params.id_user))
+            .getUserById(parseInt(req.params.id))
             .then(_.partial(response_handlers_1.default.onSuccess, res))
             .catch(_.partial(response_handlers_1.default.onError, res, 'Erro ao buscar um usuário por ID.'));
     };
