@@ -1,12 +1,12 @@
 import * as HTTPStatus from 'http-status';
 import * as jwt from 'jwt-simple';
 import { app, request, expect } from './config/helpers';
-const model = require('../../server/models');
+const model = require('../../src/models');
 
 describe('Testes de Integração',() => {
 
   'use strict';
-  const config = require('../../server/config/env/config')();
+  const { secret } = require('../../src/config/env');
   let token;
 
   const userTest = {
@@ -33,7 +33,7 @@ describe('Testes de Integração',() => {
       .then(user => {
         model.User.create(userTest)
           .then(() => {
-            this.token = jwt.encode({id_user: user.id_user}, config.secret);
+            this.token = jwt.encode({id_user: user.id_user}, secret);
             done();
           })
       })

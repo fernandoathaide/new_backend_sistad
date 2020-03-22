@@ -11,10 +11,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var HTTPStatus = __importStar(require("http-status"));
 var jwt = __importStar(require("jwt-simple"));
 var helpers_1 = require("./config/helpers");
-var model = require('../../server/models');
+var model = require('../../src/models');
 describe('Testes de Integração', function () {
     'use strict';
-    var config = require('../../server/config/env/config')();
+    var secret = require('../../src/config/env').secret;
     var token;
     var userTest = {
         id_user: 100,
@@ -38,7 +38,7 @@ describe('Testes de Integração', function () {
             .then(function (user) {
             model.User.create(userTest)
                 .then(function () {
-                _this.token = jwt.encode({ id_user: user.id_user }, config.secret);
+                _this.token = jwt.encode({ id_user: user.id_user }, secret);
                 done();
             });
         });

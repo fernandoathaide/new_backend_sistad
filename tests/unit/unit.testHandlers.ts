@@ -1,5 +1,5 @@
 import { expect } from './config/helpers';
-import Handlers from '../../server/api/responses/handlers';
+import Handlers from '../../src/core/handlers/response-handlers';
 import * as HTTPStatus from 'http-status';
 
 

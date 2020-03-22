@@ -1,6 +1,6 @@
 import { expect } from './config/helpers';
-import ServiceUser from '../../server/modules/User/serviceUser';
-const model = require('../../server/models');
+import ServiceUser from '../../src/modules/user/user-service';
+const model = require('../../src/entities');
 
 
 describe('Testes Unitários do userController', () =>{

@@ -6,15 +6,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var Chai = __importStar(require("chai"));
 var td = __importStar(require("testdouble"));
 var supertest = require('supertest');
-var api_1 = __importDefault(require("../../../server/api/api"));
-var app = api_1.default;
+var core_1 = require("../../../src/core/core");
+var app = core_1.CoreModule;
 exports.app = app;
 var request = supertest;
 exports.request = request;
