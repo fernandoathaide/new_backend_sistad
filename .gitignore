@@ -1,0 +1,9 @@
+node_modules
+.nyc_output
+server/server.js
+package-lock.json
+script.txt
+.vscode
+client
+coverage
+estudos

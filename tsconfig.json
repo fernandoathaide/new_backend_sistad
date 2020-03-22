@@ -1,0 +1,40 @@
+// Configuração do compilador do TypeScript.
+{
+    "compilerOptions":{
+        "target": "es5",
+        "module": "commonjs",
+
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+    
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "outDir": "dist", //Arquivos de distribuições código gerado será enviado para o src de produção
+        "typeRoots": [
+            "./node_modules/@types"
+        ],
+        "types":["node", "lodash", "express"]
+    },
+    "file":[
+        "./tests/unit/config/mocha.opts",
+        "./tests/integration/config/mocha.opts"
+    ],
+    "include":[
+        "src/**/*.ts", //Todas as pastas e seus arquivos ts
+        "src/**/**/*.ts",
+        "src/*.ts", //Todas os arquivos ts
+        //Arquivos de teste
+        "tests/**/*",
+        "tests/**/*.ts",
+        "./tests/unit/config/*",
+        "./tests/integration/config/*",
+        "tests/**/**/*.ts",
+        "tests/*.ts"
+    ],
+    "exclude":[
+        "node_modules"
+    ],
+    "compileOnSave": true,
+    "buildOnSave": true
+}

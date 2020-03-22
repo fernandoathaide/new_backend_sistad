@@ -1,0 +1,1 @@
+{"version":3,"file":"modules-router-map.js","sourceRoot":"","sources":["../../../src/modules/modules-router-map.ts"],"names":[],"mappings":";;AAAA,kDAAsD;AACtD,kDAAsD;AAOtD;IAaI;QAXO,sBAAiB,GAA+B;YACnD;gBACI,UAAU,EAAE,8BAAgB;gBAC5B,MAAM,EAAE,sBAAsB;aACjC;YACD;gBACI,UAAU,EAAE,8BAAgB;gBAC5B,MAAM,EAAE,sBAAsB;aACjC;SACJ,CAAC;IAEY,CAAC;IACnB,0BAAC;AAAD,CAAC,AAdD,IAcC;AAdY,kDAAmB"}

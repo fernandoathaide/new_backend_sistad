@@ -1,0 +1,29 @@
+image: node:latest
+
+stages:
+  - test
+
+run_scripts:
+  stage: test
+  before_script:
+    - apt-get update && apt-get install -y postgresql-9.6 postgresql-client libpq-dev
+    - ls -all /etc/init.d/
+    - cat /etc/passwd | grep postgres
+    - /etc/init.d/postgresql start
+    - pg_lsclusters
+    - apt-get install sudo -y
+    - sudo -u postgres psql -c 'create database ts_api_test;' 
+    - sudo -u postgres psql -c "ALTER USER postgres WITH ENCRYPTED PASSWORD 'wff@260981N';"
+    - npm i -g sequelize-cli gulp-cli nodemon swagger-ui-express
+    - npm install
+    - cd server
+    - sequelize db:migrate --env test
+    - cd ..
+    - gulp
+  script:
+    - npm run unit-teste
+    - npm run integration-teste
+
+  artifacts:
+    paths:
+      - dist/
