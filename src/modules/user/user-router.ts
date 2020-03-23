@@ -23,8 +23,13 @@ export class UserRouterModule extends BaseRouterModule {
                     isProtected: false
                 },
                 {
-                    endpoint: `${ this.context }/${this.version}/${this.moduleName}/:id`,
+                    endpoint: `${ this.context }/${this.version}/${this.moduleName}/id/:id`,
                     callback: UserController.getUserById,
+                    isProtected: false
+                },
+                {
+                    endpoint: `${ this.context }/${this.version}/${this.moduleName}/email`,
+                    callback: UserController.getUserByEmail, 
                     isProtected: false
                 }
             ],

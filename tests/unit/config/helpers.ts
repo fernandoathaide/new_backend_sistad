@@ -4,7 +4,7 @@ import * as td from 'testdouble';
 const supertest = require('supertest');
 import { CoreModule } from '../../../src/core/core';
 
-const app = CoreModule;
+const app = new CoreModule();
 const request = supertest;
 const expect = Chai.expect;
 const testDouble = td;

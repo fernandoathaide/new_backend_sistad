@@ -15,14 +15,11 @@ var morgan_1 = __importDefault(require("morgan"));
 var bodyParser = __importStar(require("body-parser"));
 var routes_1 = require("./router/routes");
 var response_handlers_1 = __importDefault(require("./handlers/response-handlers"));
-var auth_service_1 = require("../modules/auth/auth-service");
-var secret = require('../config/env').secret;
 var swaggerUi = __importStar(require("swagger-ui-express"));
 var swaggerDocument = require('./swagger.json');
 var CoreModule = (function () {
     function CoreModule() {
         this._aplicationExpress = express_1.default();
-        this.authService = new auth_service_1.AuthService(secret).setStrategy();
         this.configExpress();
         this.routerModeule = new routes_1.RouterModule(this.aplicationExpress);
         this.router();
@@ -40,11 +37,10 @@ var CoreModule = (function () {
         this._aplicationExpress.use(bodyParser.urlencoded({ extended: true }));
         this._aplicationExpress.use(bodyParser.json());
         this._aplicationExpress.use(response_handlers_1.default.errorHandlerApi);
-        this._aplicationExpress.use(this.authService.initialize());
         this._aplicationExpress.use('/api/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
     };
     CoreModule.prototype.router = function () {
-        this.routerModeule.exposeRoutes(this.authService.authenticate);
+        this.routerModeule.exposeRoutes();
     };
     CoreModule.prototype.configHeaders = function (req, res, next) {
         res.setHeader('Access-Control-Allow-Origin', '*');

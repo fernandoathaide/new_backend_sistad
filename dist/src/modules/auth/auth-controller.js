@@ -46,33 +46,29 @@ var AuthController = (function () {
     }
     AuthController.prototype.auth = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, email, password, user, error_1;
+            var _a, name_1, email, user, erro_1;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        _a = req.body, email = _a.email, password = _a.password;
-                        console.log(email, password);
-                        if (!(email && password)) return [3, 5];
-                        _b.label = 1;
-                    case 1:
-                        _b.trys.push([1, 3, , 4]);
+                        _b.trys.push([0, 2, , 3]);
+                        _a = req.body, name_1 = _a.name, email = _a.email;
                         return [4, user_service_1.default.getUserByEmail(email)];
-                    case 2:
+                    case 1:
                         user = _b.sent();
-                        response_handlers_1.default.authSuccess(res, password, user);
-                        return [3, 4];
-                    case 3:
-                        error_1 = _b.sent();
-                        response_handlers_1.default.authFail(req, res);
-                        return [3, 4];
-                    case 4: return [3, 6];
-                    case 5: return [2, response_handlers_1.default.onError(res, 'Necessário informar email e senha!', 'no-credentials')];
-                    case 6: return [2];
+                        console.log(user);
+                        console.log('Senha do usuário ===========' + user['password']);
+                        response_handlers_1.default.authSuccess(res, user['password'], user);
+                        return [3, 3];
+                    case 2:
+                        erro_1 = _b.sent();
+                        console.log(erro_1);
+                        return [3, 3];
+                    case 3: return [2];
                 }
             });
         });
     };
     return AuthController;
 }());
-exports.AuthController = AuthController;
+exports.default = new AuthController();
 //# sourceMappingURL=auth-controller.js.map

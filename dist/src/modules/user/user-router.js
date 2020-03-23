@@ -39,8 +39,13 @@ var UserRouterModule = (function (_super) {
                         isProtected: false
                     },
                     {
-                        endpoint: _this.context + "/" + _this.version + "/" + _this.moduleName + "/:id",
+                        endpoint: _this.context + "/" + _this.version + "/" + _this.moduleName + "/id/:id",
                         callback: user_controller_1.default.getUserById,
+                        isProtected: false
+                    },
+                    {
+                        endpoint: _this.context + "/" + _this.version + "/" + _this.moduleName + "/email",
+                        callback: user_controller_1.default.getUserByEmail,
                         isProtected: false
                     }
                 ],

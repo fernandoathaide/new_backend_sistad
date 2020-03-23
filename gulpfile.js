@@ -17,10 +17,10 @@ gulp.task('compile', function () {
 
 gulp.task('copyAllFiles', function() {//Lembrar de corrigir caminho relativo do arquivo mocha ../../../../dist/tests/unit/config/helpers.js
   gulp.src(['src/core/swagger.json']).pipe(gulp.dest('dist/src/core/'));
-  gulp.src('src/config/config.json').pipe(gulp.dest('dist/src/config'));
   gulp.src('src/config/database/migrations/*').pipe(gulp.dest('dist/src/config/database/migrations'));
   gulp.src('src/config/database/seenders/*').pipe(gulp.dest('dist/src/config/database/seenders'));
-  return gulp.src('tests/unit/config/mocha.opts').pipe(gulp.dest('dist/tests/unit/config')).pipe(gulp.dest('dist/tests/integration/config'));
+  gulp.src('tests/integration/config/mocha.opts').pipe(gulp.dest('dist/tests/integration/config'));
+  return gulp.src('tests/unit/config/mocha.opts').pipe(gulp.dest('dist/tests/unit/config'));
 });
 
 // gulp.task('default', gulp.series('compile', 'copyAllFiles'));

@@ -3,22 +3,20 @@ import * as _ from 'lodash';
 import UserService from '../user/user-service';
 import ResponseHandlers from '../../core/handlers/response-handlers';
 
-export class AuthController {
+class AuthController {
     
-    constructor(){ }
+    constructor(){}
 
     public async auth(req: Request, res: Response){
-        const { email, password } = req.body;
-        console.log(email, password);
-        if(email && password){
-            try {
-                const user = await UserService.getUserByEmail(email);
-                ResponseHandlers.authSuccess(res, password, user);
-            } catch (error) {
-                ResponseHandlers.authFail(req, res);
-            }
-        }else{
-            return ResponseHandlers.onError(res, 'Necessário informar email e senha!', 'no-credentials');
+        try{
+            const { name, email } = req.body;            
+            const user = await UserService.getUserByEmail(email);
+            console.log(user);
+            console.log('Senha do usuário ===========' + user['password']);
+            ResponseHandlers.authSuccess(res, user['password'] , user);
+        }catch(erro){
+            console.log(erro);
         }
     }
 }
+export default new AuthController();

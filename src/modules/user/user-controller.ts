@@ -23,12 +23,18 @@ class UserController {
             ResponseHandlers.onError(res, 'Erro ao buscar todos os usuários.', error);
         }
     }
-
     getUserById(req: Request, res: Response){
         UserService
             .getUserById(parseInt(req.params.id))
             .then(_.partial(ResponseHandlers.onSuccess, res))
             .catch(_.partial(ResponseHandlers.onError, res, 'Erro ao buscar um usuário por ID.'))
+    }
+    getUserByEmail(req: Request, res: Response){
+        console.log('EMail busca = '+ req.body.email);
+        UserService
+            .getUserByEmail(req.body.email)
+            .then(_.partial(ResponseHandlers.onSuccess, res))
+            .catch(_.partial(ResponseHandlers.onError, res, 'Erro ao buscar um usuário por Email.'))
     }
     updateUser(req: Request, res: Response){
         const id_user = parseInt(req.params.id_user);

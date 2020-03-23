@@ -86,6 +86,13 @@ var UserController = (function () {
             .then(_.partial(response_handlers_1.default.onSuccess, res))
             .catch(_.partial(response_handlers_1.default.onError, res, 'Erro ao buscar um usuário por ID.'));
     };
+    UserController.prototype.getUserByEmail = function (req, res) {
+        console.log('EMail busca = ' + req.body.email);
+        user_service_1.default
+            .getUserByEmail(req.body.email)
+            .then(_.partial(response_handlers_1.default.onSuccess, res))
+            .catch(_.partial(response_handlers_1.default.onError, res, 'Erro ao buscar um usuário por Email.'));
+    };
     UserController.prototype.updateUser = function (req, res) {
         var id_user = parseInt(req.params.id_user);
         var props = req.body;

@@ -12,24 +12,25 @@ class ServiceUser implements IUser{
 
     createUser(user: any){
         return model.User.create(user);
-    }
+    };
     getAllUser(): Bluebird<IUser[]>{
         return model.User.findAll({
             order: ['name']
           })
           .then(createUsers);
-    }
+    };
     getUserById(id_user: number): Bluebird<IUserDetail[]>{
         return model.User.findOne({
             where: {id_user}
-          })
-          .then(createUserById);
-    }
+          }).then(createUserById);
+    };
     getUserByEmail(email: string): Bluebird<IUserDetail[]>{
-        return model.User.findOne({
-            where: {email}
-          })
-          .then(createUserByEmail);
+        try{
+            return model.User.findOne({ where: {email: email} }).then(createUserByEmail);
+        }catch(error){
+            return null;
+        }
+        
     }
     updateUser(id_user: number, user: any){
         return model.User.update(user, {
@@ -38,11 +39,11 @@ class ServiceUser implements IUser{
             hooks: true,
             individualHooks: true
           });
-    }
+    };
     deleteUser(id_user: number){
         return model.User.destroy({
             where: {id_user}
           });
-    }
+    };
 }
 export default new ServiceUser();

@@ -8,23 +8,27 @@ var ServiceUser = (function () {
     ServiceUser.prototype.createUser = function (user) {
         return model.User.create(user);
     };
+    ;
     ServiceUser.prototype.getAllUser = function () {
         return model.User.findAll({
             order: ['name']
         })
             .then(user_interface_1.createUsers);
     };
+    ;
     ServiceUser.prototype.getUserById = function (id_user) {
         return model.User.findOne({
             where: { id_user: id_user }
-        })
-            .then(user_interface_1.createUserById);
+        }).then(user_interface_1.createUserById);
     };
+    ;
     ServiceUser.prototype.getUserByEmail = function (email) {
-        return model.User.findOne({
-            where: { email: email }
-        })
-            .then(user_interface_1.createUserByEmail);
+        try {
+            return model.User.findOne({ where: { email: email } }).then(user_interface_1.createUserByEmail);
+        }
+        catch (error) {
+            return null;
+        }
     };
     ServiceUser.prototype.updateUser = function (id_user, user) {
         return model.User.update(user, {
@@ -34,11 +38,13 @@ var ServiceUser = (function () {
             individualHooks: true
         });
     };
+    ;
     ServiceUser.prototype.deleteUser = function (id_user) {
         return model.User.destroy({
             where: { id_user: id_user }
         });
     };
+    ;
     return ServiceUser;
 }());
 exports.default = new ServiceUser();
