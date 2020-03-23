@@ -10,17 +10,17 @@ describe('Testes de Integração',() => {
   let token;
 
   const userTest = {
-    id_user: 100,
+    id_user: 1,
     name: 'Usuário Teste',
     email: 'teste@email.com',
-    password: 'teste'
+    password: '$2b$10$KW28Rxt5ZmtQfUsCLw9LSOzC9.D3lCx.qaOEAKznVMmjmtc3NH4dW'
   };
 
   const userDefault = {
-    id_user: 1,
+    id_user: 2,
     name: 'Default',
     email: 'default@email.com',
-    password: 'teste'
+    password: '$2b$10$KW28Rxt5ZmtQfUsCLw9LSOzC9.D3lCx.qaOEAKznVMmjmtc3NH4dW'
   };
 
     beforeEach((done) => {
@@ -43,9 +43,9 @@ describe('Testes de Integração',() => {
       it('Deve receber um JWT', done => {
         const credentials = {
           email: userDefault.email,
-          password: userDefault.password
+          password: secret
         };
-        request(app)
+        request(app.aplicationExpress)
           .post('/api/v1/auth/token')
           .send(credentials)
           .end((error, res) => {
@@ -59,7 +59,7 @@ describe('Testes de Integração',() => {
           email: 'email@emailqualquer.com',
           password: 'qualquer'
         };
-        request(app)
+        request(app.aplicationExpress)
           .post('/api/v1/auth/token')
           .send(credentials)
           .end((error, res) => {
@@ -69,11 +69,11 @@ describe('Testes de Integração',() => {
           })
       })
     });
-  /*
+  
     describe('GET /api/v1/users/all', () =>{
         it('Deve retornar um Json com todos os usuários', done =>{
-            request(app)
-            .get('/api/users/all')
+            request(app.aplicationExpress)
+            .get('/api/v1/users/all')
             .set('Content-Type', 'application/json')
             .set('Authorization', `JWT ${this.token}`)
             .end((error, res)=>{
@@ -85,11 +85,11 @@ describe('Testes de Integração',() => {
             })
         });
     });
-   
-    describe('GET /api/v1/users/:id', () =>{
+
+    describe('GET /api/v1/users/id/:id', () =>{
         it('Deve retornar um Json com um usuário', done =>{
-            request(app)
-            .get(`/api/v1/users/${userDefault.id_user}`)
+            request(app.aplicationExpress)
+            .get(`/api/v1/users/id/${userDefault.id_user}`)
             .set('Content-Type', 'application/json')
             .set('Authorization', `JWT ${this.token}`)
             .end((error, res)=>{
@@ -102,15 +102,33 @@ describe('Testes de Integração',() => {
         });
     });
 
+    describe('GET /api/v1/users/email', () =>{
+      it('Deve retornar um usuário por Email', done =>{
+        const credentials = { email: userDefault.email };
+          request(app.aplicationExpress)
+          .get(`/api/v1/users/email`)
+          .set('Content-Type', 'application/json')
+          .set('Authorization', `JWT ${this.token}`)
+          .send(credentials)
+          .end((error, res)=>{
+              expect(res.status).to.equal(HTTPStatus.OK);
+              expect(res.body.payload.id_user).to.equal(userDefault.id_user);
+              expect(res.body.payload).to.have.all.keys([ 'id_user', 'name', 'email', 'password' ]);
+              this.id_user = res.body.payload.id_user
+              done(error);
+          })
+      });
+  });
+
     describe('POST /api/v1/users/create', () =>{
         it('Deve inserir/Criar novo usuário, retorno 200', done =>{
             const user = {
-                id_user: 2,
+                id_user: 200,
                 name:'FernandoTeste',
                 email: 'novo@gmail.com',
                 password: 'novouser'
             }
-            request(app)
+            request(app.aplicationExpress)
             .post('/api/v1/users/create')
             .set('Content-Type', 'application/json')
             .set('Authorization', `JWT ${this.token}`)
@@ -124,28 +142,28 @@ describe('Testes de Integração',() => {
             })
         });
     });
-    describe('PUT /api/v1/users/:id/update', () => {
+    describe('PUT /api/v1/users/update/:id', () => {
         it('Deve atualizar um Usuário', done => {
           const user = {
-            name: 'TesteUpdate',
+            name: 'Fernando Teste Update',
             email: 'update@email.com'
           };
-          request(app)
-            .put(`/api/v1/users/${userTest.id_user}/update`)
+          request(app.aplicationExpress)
+            .put(`/api/v1/users/update/${userTest.id_user}`)
             .set('Content-Type', 'application/json')
             .set('Authorization', `JWT ${this.token}`)
             .send(user)
             .end((error, res) => {
               expect(res.status).to.equal(HTTPStatus.OK);
-              expect(res.body.payload[0]).to.eql(1);
+              //expect(res.body.payload[0]).to.eql(1);
               done(error);
             });
         });
       });
-      describe('DELETE /api/v1/users/:id/destroy', () => {
+      describe('DELETE /api/v1/users/destroy/:id', () => {
         it('Deve remover um usário', done => {
-          request(app)
-            .del(`/api/v1/users/${userTest.id_user}/destroy`)
+          request(app.aplicationExpress)
+            .del(`/api/v1/users/destroy/${userTest.id_user}`)
             .set('Content-Type', 'application/json')
             .set('Authorization', `JWT ${this.token}`)
             .end((error, res) => {
@@ -155,5 +173,4 @@ describe('Testes de Integração',() => {
             });
         });
       });
-      */
 });

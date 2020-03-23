@@ -6,12 +6,12 @@ module.exports = {
       {
         name: 'Fernando Athaide Nóbrega Filho',
         email: 'fernandoathaide@hotmail.com',
-        password: 'fernando',
+        password: '$2b$10$KW28Rxt5ZmtQfUsCLw9LSOzC9.D3lCx.qaOEAKznVMmjmtc3NH4dW',
       },
       {
         name: 'Teste',
         email: 'test@medium.com',
-        password: 'teste',
+        password: '$2b$10$KW28Rxt5ZmtQfUsCLw9LSOzC9.D3lCx.qaOEAKznVMmjmtc3NH4dW',
       }
     ]
   ),

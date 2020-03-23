@@ -30,14 +30,13 @@ class UserController {
             .catch(_.partial(ResponseHandlers.onError, res, 'Erro ao buscar um usuário por ID.'))
     }
     getUserByEmail(req: Request, res: Response){
-        console.log('EMail busca = '+ req.body.email);
         UserService
             .getUserByEmail(req.body.email)
             .then(_.partial(ResponseHandlers.onSuccess, res))
             .catch(_.partial(ResponseHandlers.onError, res, 'Erro ao buscar um usuário por Email.'))
     }
     updateUser(req: Request, res: Response){
-        const id_user = parseInt(req.params.id_user);
+        const id_user = parseInt(req.params.id);
         const props = req.body;
         UserService
             .updateUser(id_user, props)
@@ -47,7 +46,7 @@ class UserController {
     }
     deleteUser(req: Request, res: Response){
         UserService
-            .deleteUser(parseInt(req.params.id_user))
+            .deleteUser(parseInt(req.params.id))
             .then(_.partial(ResponseHandlers.onSuccess, res))
             .catch(_.partial(ResponseHandlers.onError, res, 'Erro ao deletar um usuário.'))
     }

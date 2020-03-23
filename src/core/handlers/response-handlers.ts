@@ -11,15 +11,16 @@ class ResponseHandlers {
   
     onSuccess(res: Response, data: any){
         return res.status(HTTPStatus.OK).json({ payload: data });
-    }
+    };
   
     onError(res: Response, message: string, err: any) {
         console.log(`Error Interno do Server: ${err}`)
         return res.status(HTTPStatus.INTERNAL_SERVER_ERROR).send(message);
-    }
+    };
   
     authSuccess(res: Response, credentials: any, data: any) {
-      const isMatch = bcrypt.compareSync(credentials.password, data.password);
+      //CompareSync (1° argumento: string pura senha, 2° argumento: senha do banco rash criptografada).
+      const isMatch = bcrypt.compareSync(credentials, data.password);
       if(isMatch) {
         const payload = { id_user: data.id_user };
         return res.json({
@@ -28,11 +29,11 @@ class ResponseHandlers {
       } else {
         return res.sendStatus(HTTPStatus.UNAUTHORIZED);
       }
-    }
+    };
   
     authFail(req: Request, res: Response) {
       return res.sendStatus(HTTPStatus.UNAUTHORIZED);
-    }
+    };
   
     dbErrorHandler(res: Response, err: any){
         console.log(`Error de Data Base: ${err}`)
@@ -40,7 +41,7 @@ class ResponseHandlers {
         code: 'ERR-01',
         message: 'Erro de acesso a base de dados.'
       });
-    }
+    };
   
     errorHandlerApi(err: ErrorRequestHandler, req: Request, res: Response, next: NextFunction){
       console.error(`API error handler foi executada: ${err}`);
@@ -48,7 +49,7 @@ class ResponseHandlers {
         errorCode: 'ERR-001',
         message: 'Erro Interno do Servidor de API'
       });
-    }
+    };
   }
 
   export default new ResponseHandlers(); 

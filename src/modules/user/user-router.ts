@@ -35,14 +35,14 @@ export class UserRouterModule extends BaseRouterModule {
             ],
             put: [
                 {
-                    endpoint: `${ this.context }/${this.version}/${this.moduleName}/:id/update`,
+                    endpoint: `${ this.context }/${this.version}/${this.moduleName}/update/:id`,
                     callback: UserController.updateUser,
                     isProtected: false
                 }
             ],
             delete: [
                 {
-                    endpoint: `${ this.context }/${this.version}/${this.moduleName}/:id/destroy`,
+                    endpoint: `${ this.context }/${this.version}/${this.moduleName}/destroy/:id`,
                     callback: UserController.deleteUser,
                     isProtected: false
                 }

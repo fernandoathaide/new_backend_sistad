@@ -34,4 +34,3 @@ var RouterModule = (function () {
     return RouterModule;
 }());
 exports.RouterModule = RouterModule;
-//# sourceMappingURL=routes.js.map

@@ -19,4 +19,3 @@ function createUserByEmail(_a) {
     return { id_user: id_user, name: name, email: email, password: password };
 }
 exports.createUserByEmail = createUserByEmail;
-//# sourceMappingURL=user-interface.js.map

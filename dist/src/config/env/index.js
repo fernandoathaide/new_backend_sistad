@@ -13,4 +13,3 @@ module.exports = {
     dataBasePort: DB_PORT,
     dbURL: "postgres://" + DB_USERNAME + ":" + DB_PASSWORD + "@" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME
 };
-//# sourceMappingURL=index.js.map

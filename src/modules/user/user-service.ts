@@ -29,9 +29,8 @@ class ServiceUser implements IUser{
             return model.User.findOne({ where: {email: email} }).then(createUserByEmail);
         }catch(error){
             return null;
-        }
-        
-    }
+        }  
+    };
     updateUser(id_user: number, user: any){
         return model.User.update(user, {
             where: {id_user},

@@ -17,12 +17,14 @@ var ResponseHandlers = (function () {
     ResponseHandlers.prototype.onSuccess = function (res, data) {
         return res.status(HTTPStatus.OK).json({ payload: data });
     };
+    ;
     ResponseHandlers.prototype.onError = function (res, message, err) {
         console.log("Error Interno do Server: " + err);
         return res.status(HTTPStatus.INTERNAL_SERVER_ERROR).send(message);
     };
+    ;
     ResponseHandlers.prototype.authSuccess = function (res, credentials, data) {
-        var isMatch = bcrypt.compareSync(credentials.password, data.password);
+        var isMatch = bcrypt.compareSync(credentials, data.password);
         if (isMatch) {
             var payload = { id_user: data.id_user };
             return res.json({
@@ -33,9 +35,11 @@ var ResponseHandlers = (function () {
             return res.sendStatus(HTTPStatus.UNAUTHORIZED);
         }
     };
+    ;
     ResponseHandlers.prototype.authFail = function (req, res) {
         return res.sendStatus(HTTPStatus.UNAUTHORIZED);
     };
+    ;
     ResponseHandlers.prototype.dbErrorHandler = function (res, err) {
         console.log("Error de Data Base: " + err);
         return res.status(HTTPStatus.INTERNAL_SERVER_ERROR).json({
@@ -43,6 +47,7 @@ var ResponseHandlers = (function () {
             message: 'Erro de acesso a base de dados.'
         });
     };
+    ;
     ResponseHandlers.prototype.errorHandlerApi = function (err, req, res, next) {
         console.error("API error handler foi executada: " + err);
         return res.status(HTTPStatus.INTERNAL_SERVER_ERROR).json({
@@ -50,7 +55,7 @@ var ResponseHandlers = (function () {
             message: 'Erro Interno do Servidor de API'
         });
     };
+    ;
     return ResponseHandlers;
 }());
 exports.default = new ResponseHandlers();
-//# sourceMappingURL=response-handlers.js.map

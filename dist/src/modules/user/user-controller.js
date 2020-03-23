@@ -87,14 +87,13 @@ var UserController = (function () {
             .catch(_.partial(response_handlers_1.default.onError, res, 'Erro ao buscar um usuário por ID.'));
     };
     UserController.prototype.getUserByEmail = function (req, res) {
-        console.log('EMail busca = ' + req.body.email);
         user_service_1.default
             .getUserByEmail(req.body.email)
             .then(_.partial(response_handlers_1.default.onSuccess, res))
             .catch(_.partial(response_handlers_1.default.onError, res, 'Erro ao buscar um usuário por Email.'));
     };
     UserController.prototype.updateUser = function (req, res) {
-        var id_user = parseInt(req.params.id_user);
+        var id_user = parseInt(req.params.id);
         var props = req.body;
         user_service_1.default
             .updateUser(id_user, props)
@@ -104,11 +103,10 @@ var UserController = (function () {
     };
     UserController.prototype.deleteUser = function (req, res) {
         user_service_1.default
-            .deleteUser(parseInt(req.params.id_user))
+            .deleteUser(parseInt(req.params.id))
             .then(_.partial(response_handlers_1.default.onSuccess, res))
             .catch(_.partial(response_handlers_1.default.onError, res, 'Erro ao deletar um usuário.'));
     };
     return UserController;
 }());
 exports.default = new UserController();
-//# sourceMappingURL=user-controller.js.map

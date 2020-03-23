@@ -30,6 +30,7 @@ var ServiceUser = (function () {
             return null;
         }
     };
+    ;
     ServiceUser.prototype.updateUser = function (id_user, user) {
         return model.User.update(user, {
             where: { id_user: id_user },
@@ -48,4 +49,3 @@ var ServiceUser = (function () {
     return ServiceUser;
 }());
 exports.default = new ServiceUser();
-//# sourceMappingURL=user-service.js.map

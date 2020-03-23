@@ -51,4 +51,3 @@ var CoreModule = (function () {
     return CoreModule;
 }());
 exports.CoreModule = CoreModule;
-//# sourceMappingURL=core.js.map

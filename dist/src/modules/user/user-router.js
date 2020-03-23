@@ -51,14 +51,14 @@ var UserRouterModule = (function (_super) {
                 ],
                 put: [
                     {
-                        endpoint: _this.context + "/" + _this.version + "/" + _this.moduleName + "/:id/update",
+                        endpoint: _this.context + "/" + _this.version + "/" + _this.moduleName + "/update/:id",
                         callback: user_controller_1.default.updateUser,
                         isProtected: false
                     }
                 ],
                 delete: [
                     {
-                        endpoint: _this.context + "/" + _this.version + "/" + _this.moduleName + "/:id/destroy",
+                        endpoint: _this.context + "/" + _this.version + "/" + _this.moduleName + "/destroy/:id",
                         callback: user_controller_1.default.deleteUser,
                         isProtected: false
                     }
@@ -70,4 +70,3 @@ var UserRouterModule = (function (_super) {
     return UserRouterModule;
 }(base_router_module_1.BaseRouterModule));
 exports.UserRouterModule = UserRouterModule;
-//# sourceMappingURL=user-router.js.map

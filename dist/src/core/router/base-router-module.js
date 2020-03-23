@@ -29,4 +29,3 @@ var BaseRouterModule = (function () {
     return BaseRouterModule;
 }());
 exports.BaseRouterModule = BaseRouterModule;
-//# sourceMappingURL=base-router-module.js.map
