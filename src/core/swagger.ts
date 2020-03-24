@@ -23,10 +23,6 @@ const swaggerDefinition = {
             url: "https://github.com/OAI/OpenAPI-Specification/blob/master/https://www.apache.org/licenses/LICENSE-2.0.html"
         }
     },
-    schemes: {
-        //https: "https://localhost:5000/api/v1",
-        http: "http://localhost:5000/api/v1"
-    },
     host: "localhost:5000", // the host or url of the app
     basePath: "/api/v1", // the basepath of your endpoint
 };
@@ -39,6 +35,18 @@ const options = {
 
     // path to the API docs
     apis: ["**/*controller.ts"],
+    tags: { 
+        token:{
+            description: "Everything about your Pets",
+            externalDocs:{
+                description: "Find out more",
+                url: "http://swagger.io"
+            }
+        } , 
+        users:{
+            description: "Everything about your Pets",
+        } 
+    }
 };
 // initialize swagger-jsdoc
 

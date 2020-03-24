@@ -6,20 +6,27 @@ import ResponseHandlers from '../../core/handlers/response-handlers';
 class AuthController {
     /**
      * @swagger
-     *
      * /auth/token:
      *   post:
+     *     tags:
+     *     - "token"
      *     description: Gerador de tokens
      *     produces:
-     *       - application/json
+     *       - multipart/form-data
      *     parameters:
-     *       - Email: email
-     *         description: Email para login do usuário
-     *         required: true
-     *         type: string
+     *     - name: "email"
+     *       in: "formData"
+     *       required: true
+     *       type: "string"
+     *     - name: "password"
+     *       in: "formData"
+     *       required: true
+     *       type: "string"
      *     responses:
      *       200:
-     *         description: token
+     *         description: "Token gerado com sucesso!"
+     *       401:
+     *         description: "Usuário não encontrado."
      */
 
     async auth(req: Request, res: Response){
