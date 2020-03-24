@@ -23,3 +23,4 @@ var RouterModuleFactory = (function () {
     return RouterModuleFactory;
 }());
 exports.RouterModuleFactory = RouterModuleFactory;
+//# sourceMappingURL=router-map.js.map

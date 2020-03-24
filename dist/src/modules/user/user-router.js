@@ -70,3 +70,4 @@ var UserRouterModule = (function (_super) {
     return UserRouterModule;
 }(base_router_module_1.BaseRouterModule));
 exports.UserRouterModule = UserRouterModule;
+//# sourceMappingURL=user-router.js.map

@@ -6,7 +6,23 @@ import ResponseHandlers from '../../core/handlers/response-handlers';
 class UserController {
 
     constructor(){}
-
+    /**
+     * @swagger
+     *
+     * /users/create:
+     *   post:
+     *     description: Criar um novo usuário
+     *     produces:
+     *       -application/json
+     *     parameters:
+     *       -id: id
+     *       -name: name
+     *       -email: email
+     *       -password: password
+     *     responses:
+     *       200:
+     *         description: Usuário criado com sucesso!
+     */ 
     createUser(req: Request, res: Response){
         UserService
             .createUser(req.body)

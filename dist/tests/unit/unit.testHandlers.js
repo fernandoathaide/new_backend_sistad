@@ -11,3 +11,4 @@ describe('Testes Unitários do Handler para melhorar a %.', function () {
         });
     });
 });
+//# sourceMappingURL=unit.testHandlers.js.map

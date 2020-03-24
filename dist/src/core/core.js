@@ -17,8 +17,7 @@ var routes_1 = require("./router/routes");
 var response_handlers_1 = __importDefault(require("./handlers/response-handlers"));
 var auth_service_1 = require("../modules/auth/auth-service");
 var secret = require('../config/env').secret;
-var swaggerUi = __importStar(require("swagger-ui-express"));
-var swaggerDocument = require('./swagger.json');
+var swagger = require('./swagger');
 var CoreModule = (function () {
     function CoreModule() {
         this._aplicationExpress = express_1.default();
@@ -41,7 +40,7 @@ var CoreModule = (function () {
         this._aplicationExpress.use(bodyParser.json());
         this._aplicationExpress.use(response_handlers_1.default.errorHandlerApi);
         this._aplicationExpress.use(this.authService.initialize());
-        this._aplicationExpress.use('/api/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+        swagger(this._aplicationExpress);
     };
     CoreModule.prototype.router = function () {
         this.routerModeule.exposeRoutes(this.authService.authenticate);
@@ -55,3 +54,4 @@ var CoreModule = (function () {
     return CoreModule;
 }());
 exports.CoreModule = CoreModule;
+//# sourceMappingURL=core.js.map

@@ -49,3 +49,4 @@ var ServiceUser = (function () {
     return ServiceUser;
 }());
 exports.default = new ServiceUser();
+//# sourceMappingURL=user-service.js.map
