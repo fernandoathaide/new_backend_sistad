@@ -1,0 +1,41 @@
+*.intraer,localhost,127.0.0.0/8,10.0.0.0/8,192.168.0.0/16,::1,172.16.44.50,10.*  
+
+ARQUIVO DE CONFIGURAÇÃO VPN
+    vpn_unificada_cert.ovpn
+
+GATEWAY: 189.9.13.110
+
+PROXY's:
+    proxy.ccabr.intraer:8080
+    proxybrasilia.intraer:8080 
+    172.16.31.111
+
+USUÁRIO/SENHA JUNIOR:
+    12502320747
+    444425631003Ju@
+
+USUÁRIO/SENHA FERNANDO:
+    04076228456
+    WFF@260981n
+
+desenvolvimento.sai@gmail.com
+@Sai123456
+
+LINUX:: 
+
+#=======================
+# Cofigurações do proxy:
+#       PROXY:
+#        proxy.ccabr.intraer:8080
+#        proxybrasilia.intraer:8080 
+#=======================
+
+proxy="http://04076228456:wff@260981N%40@proxy.ccabr.intraer:8080"
+export https_proxy=$proxy
+export http_proxy=$proxy
+export ftp_proxy=$proxy
+export no_proxy="*.intraer,localhost,127.0.0.0/8,10.0.0.0/8,192.168.0.0/16,::1,172.16.44.50,10.*,intraer,https://gitlab.com*"
+
+
+Para recarregar alterações no ~/.bashrc sem precisar fazer logout e login novamente basta executar:
+    $ source ~/.bashrc ou $ . ~/.bashrc

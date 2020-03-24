@@ -5,8 +5,8 @@ import * as bodyParser from 'body-parser';
 import { RouterModule } from './router/routes';
 import ResponseHandlers from './handlers/response-handlers';
 
-// import { AuthService } from '../modules/auth/auth-service';
-// const { secret } = require('../config/env');
+import { AuthService } from '../modules/auth/auth-service';
+const { secret } = require('../config/env');
 
 import * as swaggerUi from 'swagger-ui-express';
 const swaggerDocument = require('./swagger.json');
@@ -15,12 +15,12 @@ const swaggerDocument = require('./swagger.json');
 export class CoreModule{
 
     private _aplicationExpress: Application;
-    //private authService;
+    private authService;
     private routerModeule: RouterModule;
 
     constructor(){
         this._aplicationExpress = express();
-        //this.authService = new AuthService(secret).setStrategy();
+        this.authService = new AuthService(secret).setStrategy();
         this.configExpress();
         this.routerModeule = new RouterModule(this.aplicationExpress);
         this.router();
@@ -36,18 +36,18 @@ export class CoreModule{
         this._aplicationExpress.use(bodyParser.urlencoded({extended: true})); // URLENCODED - Formato dos dados submetidas extended true vai ser capaz de interpretar mais informações do que o padrão.
         this._aplicationExpress.use(bodyParser.json());//Se o que for passado for um JSON transformando em um objeto para ser tratado aqui dentro
         this._aplicationExpress.use(ResponseHandlers.errorHandlerApi);
-        //this._aplicationExpress.use(this.authService.initialize());
+        this._aplicationExpress.use(this.authService.initialize());
         this._aplicationExpress.use('/api/swagger',swaggerUi.serve, swaggerUi.setup(swaggerDocument));
     }
     private router(): void{
-        //this.routerModeule.exposeRoutes(this.authService.authenticate);
-        this.routerModeule.exposeRoutes();
+        this.routerModeule.exposeRoutes(this.authService.authenticate);
+        //this.routerModeule.exposeRoutes();
     }
     private configHeaders(req: Request, res: Response, next: NextFunction){
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
         res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-        // res.setHeader('Access-Control-Allow-Credentials', true);
+        //res.setHeader('Access-Control-Allow-Credentials', true);
         next();
     }
 }
