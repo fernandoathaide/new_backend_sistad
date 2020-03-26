@@ -31,7 +31,6 @@ class AuthController {
 
     async auth(req: Request, res: Response){
         const { email, password } = req.body;
-        console.log(email, password);
         if(email && password){
             try {
                 const user = await UserService.getUserByEmail(email);

@@ -15,18 +15,18 @@ var model = require('../../src/entities');
 var secret = require('../../src/config/env').secret;
 describe('Testes de Integração', function () {
     'use strict';
-    var token;
+    var token = 0;
     var userTest = {
         id_user: 1,
         name: 'Usuário Teste',
         email: 'teste@email.com',
-        password: '$2b$10$KW28Rxt5ZmtQfUsCLw9LSOzC9.D3lCx.qaOEAKznVMmjmtc3NH4dW'
+        password: 'teste'
     };
     var userDefault = {
         id_user: 2,
         name: 'Default',
         email: 'default@email.com',
-        password: '$2b$10$KW28Rxt5ZmtQfUsCLw9LSOzC9.D3lCx.qaOEAKznVMmjmtc3NH4dW'
+        password: 'teste'
     };
     beforeEach(function (done) {
         model.User.destroy({
@@ -38,7 +38,8 @@ describe('Testes de Integração', function () {
             .then(function (user) {
             model.User.create(userTest)
                 .then(function () {
-                _this.token = jwt.encode({ id_user: user.id_user }, secret);
+                var payload = { id_user: user.id_user, email: user.email };
+                _this.token = jwt.encode(payload, secret);
                 done();
             });
         });
@@ -47,7 +48,7 @@ describe('Testes de Integração', function () {
         it('Deve receber um JWT', function (done) {
             var credentials = {
                 email: userDefault.email,
-                password: secret
+                password: userDefault.password
             };
             helpers_1.request(helpers_1.app.aplicationExpress)
                 .post('/api/v1/auth/token')
@@ -75,6 +76,7 @@ describe('Testes de Integração', function () {
     });
     describe('GET /api/v1/users/all', function () {
         it('Deve retornar um Json com todos os usuários', function (done) {
+            var token = { token: _this.token };
             helpers_1.request(helpers_1.app.aplicationExpress)
                 .get('/api/v1/users/all')
                 .set('Content-Type', 'application/json')
@@ -155,6 +157,7 @@ describe('Testes de Integração', function () {
                 .send(user)
                 .end(function (error, res) {
                 helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
+                helpers_1.expect(res.body.payload[0]).to.eql(1);
                 done(error);
             });
         });
@@ -173,4 +176,3 @@ describe('Testes de Integração', function () {
         });
     });
 });
-//# sourceMappingURL=integration.test.js.map

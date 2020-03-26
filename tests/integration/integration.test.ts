@@ -7,20 +7,20 @@ const { secret } = require('../../src/config/env');
 describe('Testes de Integração',() => {
 
   'use strict';
-  let token;
+  const token = 0;
 
   const userTest = {
     id_user: 1,
     name: 'Usuário Teste',
     email: 'teste@email.com',
-    password: '$2b$10$KW28Rxt5ZmtQfUsCLw9LSOzC9.D3lCx.qaOEAKznVMmjmtc3NH4dW'
+    password: 'teste'
   };
 
   const userDefault = {
     id_user: 2,
     name: 'Default',
     email: 'default@email.com',
-    password: '$2b$10$KW28Rxt5ZmtQfUsCLw9LSOzC9.D3lCx.qaOEAKznVMmjmtc3NH4dW'
+    password: 'teste'
   };
 
     beforeEach((done) => {
@@ -31,9 +31,10 @@ describe('Testes de Integração',() => {
         return model.User.create(userDefault);
       })
       .then(user => {
-        model.User.create(userTest)
+          model.User.create(userTest)
           .then(() => {
-            this.token = jwt.encode({id_user: user.id_user}, secret);
+            const payload = { id_user: user.id_user, email: user.email };
+            this.token = jwt.encode(payload, secret);
             done();
           })
       })
@@ -43,7 +44,7 @@ describe('Testes de Integração',() => {
       it('Deve receber um JWT', done => {
         const credentials = {
           email: userDefault.email,
-          password: secret
+          password: userDefault.password
         };
         request(app.aplicationExpress)
           .post('/api/v1/auth/token')
@@ -72,6 +73,7 @@ describe('Testes de Integração',() => {
   
     describe('GET /api/v1/users/all', () =>{
         it('Deve retornar um Json com todos os usuários', done =>{
+            const token = { token: this.token };
             request(app.aplicationExpress)
             .get('/api/v1/users/all')
             .set('Content-Type', 'application/json')
@@ -155,7 +157,7 @@ describe('Testes de Integração',() => {
             .send(user)
             .end((error, res) => {
               expect(res.status).to.equal(HTTPStatus.OK);
-              //expect(res.body.payload[0]).to.eql(1);
+              expect(res.body.payload[0]).to.eql(1);
               done(error);
             });
         });

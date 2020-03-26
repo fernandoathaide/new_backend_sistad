@@ -20,7 +20,7 @@ export class UserRouterModule extends BaseRouterModule {
                 {
                     endpoint: `${ this.context }/${this.version}/${this.moduleName}/all`,
                     callback: UserController.getAllUser,
-                    isProtected: false
+                    isProtected: true
                 },
                 {
                     endpoint: `${ this.context }/${this.version}/${this.moduleName}/id/:id`,

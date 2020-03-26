@@ -22,7 +22,7 @@ class ResponseHandlers {
       //CompareSync (1° argumento: string pura senha, 2° argumento: senha do banco rash criptografada).
       const isMatch = bcrypt.compareSync(credentials, data.password);
       if(isMatch) {
-        const payload = { id_user: data.id_user };
+        const payload = { id_user: data.id_user, email: data.email };
         return res.json({
                   token: jwt.encode(payload, secret)
                });

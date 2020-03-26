@@ -39,4 +39,3 @@ var AuthRouterModule = (function (_super) {
     return AuthRouterModule;
 }(base_router_module_1.BaseRouterModule));
 exports.AuthRouterModule = AuthRouterModule;
-//# sourceMappingURL=auth-router.js.map

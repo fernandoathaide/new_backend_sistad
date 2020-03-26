@@ -15,13 +15,13 @@ var morgan_1 = __importDefault(require("morgan"));
 var bodyParser = __importStar(require("body-parser"));
 var routes_1 = require("./router/routes");
 var response_handlers_1 = __importDefault(require("./handlers/response-handlers"));
-var auth_service_1 = require("../modules/auth/auth-service");
+var auth_strategy_1 = require("../modules/auth/auth-strategy");
 var secret = require('../config/env').secret;
 var swagger = require('./swagger');
 var CoreModule = (function () {
     function CoreModule() {
         this._aplicationExpress = express_1.default();
-        this.authService = new auth_service_1.AuthService(secret).setStrategy();
+        this.authService = new auth_strategy_1.AuthStrategy(secret).setStrategy();
         this.configExpress();
         this.routerModeule = new routes_1.RouterModule(this.aplicationExpress);
         this.router();
@@ -54,4 +54,3 @@ var CoreModule = (function () {
     return CoreModule;
 }());
 exports.CoreModule = CoreModule;
-//# sourceMappingURL=core.js.map

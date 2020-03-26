@@ -2,7 +2,7 @@ import passport from 'passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import userService from '../user/user-service';
 
-export class AuthService{
+export class AuthStrategy{
     
     private secret: string;
 
@@ -13,7 +13,13 @@ export class AuthService{
         let opts = {
             secretOrKey: this.secret,
             jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('jwt')
+            // jwtFromRequest: ExtractJwt.fromHeader('jwt') //Extrai o Token do Header da Requisição
+            /**
+             * jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('jwt')
+             * Extrai o Token do Header da Requisição atribui a uma função
+             * */
         };
+        console.log(opts);
         passport.use(new Strategy(opts, (jwtPayload, done) =>{
             userService
                 .getUserById(jwtPayload.id_user)
@@ -32,8 +38,8 @@ export class AuthService{
         }));
         return {
             //Com a ES6 podemos fazer a declaração inline de uma ArrowFunction caso este possua apenas um comando.
-            initialize: () => passport.initialize(),
-            authenticate: () => passport.authenticate('jwt', {session: false})
+            initialize: () => passport.initialize(), // Inicializa o Passport
+            authenticate: () => passport.authenticate('jwt', {session: false}) // Retorna a estratégia Obj Ativo
           }
     }
     

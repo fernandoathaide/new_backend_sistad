@@ -36,7 +36,7 @@ var UserRouterModule = (function (_super) {
                     {
                         endpoint: _this.context + "/" + _this.version + "/" + _this.moduleName + "/all",
                         callback: user_controller_1.default.getAllUser,
-                        isProtected: false
+                        isProtected: true
                     },
                     {
                         endpoint: _this.context + "/" + _this.version + "/" + _this.moduleName + "/id/:id",
@@ -70,4 +70,3 @@ var UserRouterModule = (function (_super) {
     return UserRouterModule;
 }(base_router_module_1.BaseRouterModule));
 exports.UserRouterModule = UserRouterModule;
-//# sourceMappingURL=user-router.js.map

@@ -26,7 +26,7 @@ var ResponseHandlers = (function () {
     ResponseHandlers.prototype.authSuccess = function (res, credentials, data) {
         var isMatch = bcrypt.compareSync(credentials, data.password);
         if (isMatch) {
-            var payload = { id_user: data.id_user };
+            var payload = { id_user: data.id_user, email: data.email };
             return res.json({
                 token: jwt.encode(payload, secret)
             });
@@ -59,4 +59,3 @@ var ResponseHandlers = (function () {
     return ResponseHandlers;
 }());
 exports.default = new ResponseHandlers();
-//# sourceMappingURL=response-handlers.js.map

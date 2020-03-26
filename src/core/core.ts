@@ -5,7 +5,7 @@ import * as bodyParser from 'body-parser';
 import { RouterModule } from './router/routes';
 import ResponseHandlers from './handlers/response-handlers';
 
-import { AuthService } from '../modules/auth/auth-service';
+import { AuthStrategy } from '../modules/auth/auth-strategy';
 const { secret } = require('../config/env');
 
 const swagger = require('./swagger');
@@ -19,7 +19,7 @@ export class CoreModule{
 
     constructor(){
         this._aplicationExpress = express();
-        this.authService = new AuthService(secret).setStrategy();
+        this.authService = new AuthStrategy(secret).setStrategy();
         this.configExpress();
         this.routerModeule = new RouterModule(this.aplicationExpress);
         this.router();

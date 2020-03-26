@@ -51,7 +51,6 @@ var AuthController = (function () {
                 switch (_b.label) {
                     case 0:
                         _a = req.body, email = _a.email, password = _a.password;
-                        console.log(email, password);
                         if (!(email && password)) return [3, 5];
                         _b.label = 1;
                     case 1:
@@ -75,4 +74,3 @@ var AuthController = (function () {
     return AuthController;
 }());
 exports.default = new AuthController();
-//# sourceMappingURL=auth-controller.js.map
