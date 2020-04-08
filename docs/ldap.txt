@@ -1,0 +1,19 @@
+172.16.38.190
+porta: 389
+LDAP v3
+
+NÃO - Negociação TLS
+NÃO - Ignore Certificate
+NÃO - Seguir Referências
+
+Método de Autorização (Conectar diretamente como um usuário)
+DN Base dc=intraer
+Caracteres de Pesquisa uid=[search]
+Usuário do DN uid=[username],ou=cpo,dc=intraer
+
+
+Mapa: Nome Completo givenName
+Mapa: Email mail
+Mapa: User ID uid
+
+NÃO - Debug 

@@ -134,3 +134,8 @@ npm i -S custom-env
 
 
     source ~/.bashrc // Reincia sem sair do terminal
+
+
+    npm install ldapjs ldapjs-client -S
+    npm install request -S
+    npm install ldapjs ldapjs-client passport-ldapauth -S
