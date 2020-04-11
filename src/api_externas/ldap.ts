@@ -1,42 +1,29 @@
-var senha = 'wff@260981N';
-var usuario = '04076228456';
+'use strict'
+import {LdapAuthManager} from 'ldap-login';
+async function getUserLdap() {
 
-var ldap = require('ldapjs');
-var tlsOptions = {
-    port: '389'
-};
-var client = ldap.createClient({
-    url: 'ldap://172.16.38.190',
-    tlsOptions: tlsOptions
-});
+    const ldapAuthManager = new LdapAuthManager({
+        url: 'ldap://172.16.38.168:389',
+        baseDn:'ou=cpo,dc=intraer,dc=fab',
+        //baseDn: 'ou=contas,dc=fab,dc=intraer', // Base domain. Your user must be in a lower level
+        idKey: 'uid' // Key user as username
+    });
 
-client.bind(usuario, senha, function (err) {
-    if (err) {
-        console.log('Error occurred while binding');
-    } else {
-        var base = 'dc=intraer';
-        var search_options = {
-            scope: 'sub',
-            filter: '(&(objectClass=*)(CN=' + usuario + '))',
-            attrs: 'memberOf'
-        };
-        client.search(base, search_options, function (err, res) {
-            if (err) {
-                console.log('Error occurred while ldap search');
-            } else {
-                res.on('searchEntry', function (entry) {
-                    console.log('Entry', JSON.stringify(entry.object));
-                });
-                res.on('searchReference', function (referral) {
-                    console.log('Referral', referral);
-                });
-                res.on('error', function (err) {
-                    console.log('Error is', err);
-                });
-                res.on('end', function (result) {
-                    console.log('Result is', result);
-                });
-            }
-        });
+    const isValid = await ldapAuthManager.login('04076228456', 'wff@260981N');
+
+    if (isValid) {
+      const ldapClient = await ldapAuthManager.getClient();
+      const atr = ['cn', 'description', 'mail', 'displayname', 'fabnrordem'];
+      const users = await ldapClient.search(ldapAuthManager.username, { attributes: atr })
+      return users[0]; //1º elemento do array de resposta do search;
     }
+    return false;
+  }
+
+var userLdap = Promise.resolve(getUserLdap());
+userLdap.then(function(u) {
+    console.log("Show!");
+    console.log(u); // "Resolving"
+}, function(e) {
+    console.log("Erro: " + e);
 });

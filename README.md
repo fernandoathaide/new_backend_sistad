@@ -138,4 +138,7 @@ npm i -S custom-env
 
     npm install ldapjs ldapjs-client -S
     npm install request -S
-    npm install ldapjs ldapjs-client passport-ldapauth -S
+    npm install ldapjs ldapjs-client passport-ldapauth ldap-login -S
+    npm install passport-ldapauth -S
+    
+    npm install ldap-login -S
